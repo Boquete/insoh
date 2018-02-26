@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Vehicles{% endblock %}
+
+{% block content %}
+    <a href="{% url 'vehicle_create' %}"><button>Create vehicle</button></a>
+
+    {% for vehicle in vehicles_list %}
+        <div class="detail">
+            <h2>{{ vehicle.vid }}</h2>
+            <ul>
+                <li><strong>Vehicle ID:</strong> {{ vehicle.vid }}</li>
+                <li><strong>Vehicle name:</strong> {{ vehicle.name }}</li>
+                <li>
+                    <strong>Vehicle batteries:</strong> {{ vehicle.batteries.count }}
+                    <ul>
+                        <li><strong>Enabled:</strong> {{ vehicle.batteries_enabled }}
+                        <li><strong>Disabled:</strong> {{ vehicle.batteries_disabled }}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <a href="{% url 'vehicle_update' pk=vehicle.pk %}" ><button>Edit</button></a>
+    {% endfor %}
+
+    {% block pagination %}
+      {% if is_paginated %}
+          <div class="pagination">
+              <span class="page-links">
+                  {% if page_obj.has_previous %}
+                      <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+                  {% endif %}
+                  <span class="page-current">
+                      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                  </span>
+                  {% if page_obj.has_next %}
+                      <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+                  {% endif %}
+              </span>
+          </div>
+      {% endif %}
+    {% endblock %}
+{% endblock %}

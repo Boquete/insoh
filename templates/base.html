@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            {% block title %}Home{% endblock %} - Insoh
+        </title>
+        {% block extrahead %}{% endblock %}
+    </head>
+    <body>
+        <div id="main-container" class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>
