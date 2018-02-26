@@ -17,7 +17,7 @@ class Vehicle(models.Model):
 
     @cached_property
     def batteries_disabled(self):
-        return self.batteries.filtfer(is_enabled=False).count()
+        return self.batteries.filter(is_enabled=False).count()
 
 
 class Battery(models.Model):
